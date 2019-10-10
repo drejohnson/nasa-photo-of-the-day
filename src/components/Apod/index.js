@@ -1,13 +1,28 @@
-import React, { Fragment } from 'react';
-import Date from '../Date';
+import React, { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
+import DateSelector from '../Date';
 
-export default function Apod({ data }) {
+import getDays from '../../util/getDays';
+
+export default function Apod() {
+  const days = getDays(5);
+  const [date, setDate] = useState(days[0]);
+  const [image, setImage] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.nasa.gov/planetary/apod?date=${date}&api_key=N4MpQjQ0tUkib6KcvHGIMTd2736496guxIZuV994`,
+      )
+      .then(response => setImage(response.data));
+  }, [date]);
+
   return (
     <div>
-      <Date data={data} />
-      <h2>{data.title}</h2>
-      <img src={data.hdurl} alt={data.title} />
-      <h3>{data.explanation}</h3>
+      <DateSelector days={days} date={date} setDate={setDate} />
+      <h2>{image.title}</h2>
+      <img src={image.hdurl} alt={image.title} />
+      <h3>{image.explanation}</h3>
     </div>
   );
 }
