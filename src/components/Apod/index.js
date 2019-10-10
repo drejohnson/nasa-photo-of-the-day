@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import DateSelector from '../Date';
 
