@@ -6,7 +6,14 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   max-width: 800px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 0.5rem;
   z-index: 5;
+
+  h4 {
+    font-size: 1.25rem;
+  }
 `;
 
 const Input = styled.input.attrs(props => ({
