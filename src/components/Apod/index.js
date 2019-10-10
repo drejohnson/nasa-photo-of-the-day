@@ -1,12 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import DateSelector from '../Date';
 
-import getDays from '../../util/getDays';
-
 export default function Apod() {
-  const days = getDays(5);
-  const [date, setDate] = useState(days[0]);
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [image, setImage] = useState({});
 
   useEffect(() => {
@@ -19,7 +17,7 @@ export default function Apod() {
 
   return (
     <div>
-      <DateSelector days={days} date={date} setDate={setDate} />
+      <DateSelector date={date} setDate={setDate} />
       <h2>{image.title}</h2>
       <img src={image.hdurl} alt={image.title} />
       <h3>{image.explanation}</h3>
